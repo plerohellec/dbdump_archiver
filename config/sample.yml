@@ -1,0 +1,7 @@
+pg_dump_path: '/usr/lib/postgresql/10/bin/pg_dump'
+databases:
+  sample_db_name:
+    host: 'www.example.com'
+    username: 'backups'
+    password: 'secret'
+    archive_dir: './dumps'

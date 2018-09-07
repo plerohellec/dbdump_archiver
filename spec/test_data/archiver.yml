@@ -1,0 +1,12 @@
+pg_dump_path: '/usr/lib/postgresql/10/bin/pg_dump'
+databases:
+  db_one:
+    host: 'www.example-one.com'
+    username: 'backups'
+    password: 'secret_one'
+    archive_dir: 'dumps'
+  db_two:
+    host: 'www.example-two.org'
+    username: 'backups'
+    password: 'secret_two'
+    archive_dir: 'dumps'
