@@ -29,13 +29,13 @@ module DbdumpArchiver
     def existing_dump_files(period)
       filenames = case period
       when :daily
-        Dir.glob("#{@archive_dir}/#{@dbname}-daily-*.sql")
+        Dir.glob("#{@archive_dir}/#{@dbname}-daily-*.dump")
       when :weekly
-        Dir.glob("#{@archive_dir}/#{@dbname}-weekly-*.sql")
+        Dir.glob("#{@archive_dir}/#{@dbname}-weekly-*.dump")
       when :monthly
-        Dir.glob("#{@archive_dir}/#{@dbname}-monthly-*.sql")
+        Dir.glob("#{@archive_dir}/#{@dbname}-monthly-*.dump")
       when :yearly
-        Dir.glob("#{@archive_dir}/#{@dbname}-yearly-*.sql")
+        Dir.glob("#{@archive_dir}/#{@dbname}-yearly-*.dump")
       end
 
       filenames.map do |filename|

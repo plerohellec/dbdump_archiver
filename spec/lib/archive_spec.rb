@@ -7,7 +7,7 @@ module DbdumpArchiver
 
   describe Archive do
     after(:each) do
-      Dir.glob("#{PLAYGROUND_DIR}/*.sql").each do |file|
+      Dir.glob("#{PLAYGROUND_DIR}/*.dump").each do |file|
         File.unlink(file)
       end
     end
@@ -110,13 +110,13 @@ module DbdumpArchiver
     end
 
     def touch_dump_file(period, time_str)
-      filename = "#{PLAYGROUND_DIR}/#{TEST_DBNAME}-#{period}-#{time_str}.sql"
+      filename = "#{PLAYGROUND_DIR}/#{TEST_DBNAME}-#{period}-#{time_str}.dump"
       f = File.open(filename, "w")
       f.close
     end
 
     def assert_dump_file_exist(period, time_str, exist=true)
-      filename = "#{PLAYGROUND_DIR}/#{TEST_DBNAME}-#{period}-#{time_str}.sql"
+      filename = "#{PLAYGROUND_DIR}/#{TEST_DBNAME}-#{period}-#{time_str}.dump"
       expect(File.exist?(filename)).to be exist
     end
   end

@@ -9,7 +9,7 @@ module DbdumpArchiver
     end
 
     def utc_time
-      if @filename =~ /(\d{8}_\d{4})\.sql/
+      if @filename =~ /(\d{8}_\d{4})\.dump/
         time_str = $1
       else
         raise RuntimeError, "No time found in #{@filename}"

@@ -19,7 +19,7 @@ module DbdumpArchiver
       end
 
       logger.info "Fetching #{@dbname} from #{@host}..."
-      cmd = "#{@pg_dump} -U #{@username} -h #{@host} -d #{@dbname} > #{dump_filename}"
+      cmd = "#{@pg_dump} -U #{@username} -h #{@host} -d #{@dbname} -Fc -Z3 > #{dump_filename}"
       result = system("PGPASSWORD='#{@password}' #{cmd}")
       if result
         logger.info "pg_dump_successful to #{dump_filename}"
