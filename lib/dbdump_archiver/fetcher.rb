@@ -19,7 +19,7 @@ module DbdumpArchiver
       end
 
       logger.info "Fetching #{@dbname} from #{@host}..."
-      cmd = "#{@pg_dump} -U #{@username} -h #{@host} -d #{@dbname} -Fc -Z3 > #{dump_filename}"
+      cmd = "#{@pg_dump} -U #{@username} -h #{@host} -d #{@dbname} -Fc -f #{dump_filename}"
       result = system("PGPASSWORD='#{@password}' #{cmd}")
       if result
         logger.info "pg_dump_successful to #{dump_filename}"
@@ -32,12 +32,12 @@ module DbdumpArchiver
     private
 
     def dump_filename
-      "#{@archive_dir}/#{@dbname}-daily-#{Time.now.utc.strftime("%Y%m%d_%H%M")}.sql"
+      "#{@archive_dir}/#{@dbname}-daily-#{Time.now.utc.strftime("%Y%m%d_%H%M")}.dump"
     end
 
     def exist_dump_file_for_today?
       today = Time.now.utc
-      existing_files = Dir.glob("#{@archive_dir}/#{@dbname}-daily-#{today.strftime("%Y%m%d")}_*.sql")
+      existing_files = Dir.glob("#{@archive_dir}/#{@dbname}-daily-#{today.strftime("%Y%m%d")}_*.dump")
       existing_files.first
     end
   end
