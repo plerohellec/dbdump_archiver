@@ -22,7 +22,7 @@ module DbdumpArchiver
         num_promoted = archiver.promote
         num_deleted = archiver.delete_old
 
-        @logger.info "promoted #{num_promoted} #{period[:large]} files, deleted #{num_deleted} #{period[:small]} files"
+        @logger.debug "#{@dbname}: promoted #{num_promoted} #{period[:large]} files, deleted #{num_deleted} #{period[:small]} files"
       end
     end
 
