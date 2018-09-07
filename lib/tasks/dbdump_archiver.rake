@@ -57,7 +57,7 @@ namespace :dbdump_archiver do
   end
 
   def config
-    @config ||= DbdumpArchiver::Config.new(File.join(File.dirname(__FILE__), '../..', CONFIG_FILENAME))
+    @config ||= DbdumpArchiver::Config.new(CONFIG_FILENAME)
   end
 
   def logger
