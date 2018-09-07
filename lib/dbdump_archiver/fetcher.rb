@@ -18,12 +18,14 @@ module DbdumpArchiver
         return
       end
 
-      cmd = "PGPASSWORD='#{@password}' #{@pg_dump} -U #{@username} -h #{@host} -d #{@dbname} > #{dump_filename}"
-      result = system(cmd)
+      logger.info "Fetching #{@dbname} from #{@host}..."
+      cmd = "#{@pg_dump} -U #{@username} -h #{@host} -d #{@dbname} > #{dump_filename}"
+      result = system("PGPASSWORD='#{@password}' #{cmd}")
       if result
-        logger.debug "pg_dump_successful to #{dump_filename}"
+        logger.info "pg_dump_successful to #{dump_filename}"
       else
         logger.error "The pg_dump command failed: #{cmd}"
+        File.unlink(dump_filename)
       end
     end
 
