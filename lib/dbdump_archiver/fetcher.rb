@@ -37,7 +37,7 @@ module DbdumpArchiver
 
     def exist_dump_file_for_today?
       today = Time.now.utc
-      existing_files = Dir.glob("#{@archive_dir}/#{@dbname}-daily-#{today.strftime("%Y%m%d")}_*.dump")
+      existing_files = Dir.glob("#{@archive_dir}/#{@dbname}-*-#{today.strftime("%Y%m%d")}_*.dump")
       existing_files.first
     end
   end
