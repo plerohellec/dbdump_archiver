@@ -20,10 +20,14 @@ Or install it yourself as:
 
     $ gem install dbdump_archiver
 
-## Usage
-Your Postgres install must have a user with CONNECT and SELECT privileges to the databases
+## Requirements
+Your Postgresql databases must have a user/role with CONNECT and SELECT privileges to the databases
 you want backed up.
 
+`pg_dump` must be available on the machine running the gem.
+Path to the executable can be specified in the config file.
+
+## Usage
 Create a directory where to store the dump file, for example `./dumps`.
 
 Create a configuration file `archiver.yml`.
@@ -33,13 +37,13 @@ Contents look like this:
 pg_dump_path: '/usr/lib/postgresql/10/bin/pg_dump'
 databases:
   sample_db_name:
-    host: 'www.example.com'
+    host: 'db.example.com'
     username: 'backups'
     password: 'secret'
     archive_dir: './dumps'
 ```
 
-Run this command to both fetch and archive all existing dump files listed in the configuration file:
+After checking out the gem and running `bundle install`, run this command from the gem root directory to fetch and archive all existing dump files listed in the configuration file:
 
 ```sh
 export DBARCHIVER_LOGFILE='./archiver.log'
@@ -56,10 +60,14 @@ This rake task is responsible for fetching, archiving and aging the dump files.
 At most 1 dump file will be fetched per database per day and it will be called `{dbname}-daily-yyyymmdd_hhmm.dump`.
 
 ### Archiving the database dumps
-The daily dumps fetched on Sundays (GMT) will be renamed to *weekly*: `{dbname}-weekly-yyyymmdd_hhmm.dump`.
+The daily dumps fetched on Sundays (GMT) will be renamed to **weekly**:
+`{dbname}-weekly-yyyymmdd_hhmm.dump`.
 
-The weekly dumps created during the first week of each month will be renamed to *monthly*:
+The weekly dumps created during the first week of each month will be renamed to **monthly**:
 `{dbname}-monthly-yyyymmdd_hhmm.dump`
+
+The monthly dumps created during the first month of each year will bee renamed to **yearly**:
+`{dbname}-yearly-yyyymmdd_hhmm.dump`
 
 ### Aging the database dumps
 The rake task will retain the following numbers of dump files.
