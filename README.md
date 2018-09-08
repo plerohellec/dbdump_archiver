@@ -43,8 +43,30 @@ Run this command to both fetch and archive all existing dump files listed in the
 
 ```sh
 export DBARCHIVER_LOGFILE='./archiver.log'
+export DBARCHIVER_CONFIG='./archiver.yml'
 bundle exec rake dbdump_archiver:fetch_and_archive_all
 ```
+
+Setup a cronjob that runs at least once a day and executes the rake task above. This rake task is idempotent
+so it won't fetch more dumps than it needs.
+
+This rake task is responsible for fetching, archiving and aging the dump files.
+
+### Fetching the database dumps
+At most 1 dump file will be fetched per database per day and it will be called `{dbname}-daily-yyyymmdd_hhmm.dump`.
+
+### Archiving the database dumps
+The daily dumps fetched on Sundays (GMT) will be renamed to *weekly*: `{dbname}-weekly-yyyymmdd_hhmm.dump`.
+
+The weekly dumps created during the first week of each month will be renamed to *monthly*:
+`{dbname}-monthly-yyyymmdd_hhmm.dump`
+
+### Aging the database dumps
+The rake task will retain the following numbers of dump files.
+* 10 dailies
+* 5 weeklies
+* 13 monthlies
+* yearlies: no limit
 
 ## Development
 
