@@ -43,6 +43,7 @@ namespace :dbdump_archiver do
     fetcher = DbdumpArchiver::Fetcher.new(logger,
         config.pg_dump_path,
         db['host'],
+        db.fetch('port', 5432)
         dbname,
         db['username'],
         db['password'],
