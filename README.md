@@ -38,6 +38,7 @@ pg_dump_path: '/usr/lib/postgresql/10/bin/pg_dump'
 databases:
   sample_db_name:
     host: 'db.example.com'
+    port: 5432
     username: 'backups'
     password: 'secret'
     archive_dir: './dumps'

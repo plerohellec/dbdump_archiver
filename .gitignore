@@ -15,6 +15,7 @@
 /dumps/*
 !/log/.keep
 !/dumps/.keep
+.tags
 
 config/archiver.yml
 

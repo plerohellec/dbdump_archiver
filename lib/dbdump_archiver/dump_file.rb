@@ -3,7 +3,7 @@ require 'date'
 module DbdumpArchiver
   class DumpFile
     attr_reader :filename
-    
+
     def initialize(filename)
       @filename = filename
     end

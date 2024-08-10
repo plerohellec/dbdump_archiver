@@ -2,10 +2,11 @@ module DbdumpArchiver
   class Fetcher
     attr_reader :logger
 
-    def initialize(logger, pg_dump, host, dbname, username, password, archive_dir)
+    def initialize(logger, pg_dump, host, port, dbname, username, password, archive_dir)
       @logger = logger
       @pg_dump = pg_dump
       @host = host
+      @port = port
       @dbname = dbname
       @username = username
       @password = password
@@ -19,7 +20,7 @@ module DbdumpArchiver
       end
 
       logger.info "Fetching #{@dbname} from #{@host}..."
-      cmd = "#{@pg_dump} -U #{@username} -h #{@host} -d #{@dbname} -Fc -f #{dump_filename}"
+      cmd = "#{@pg_dump} -U #{@username} -h #{@host} -p #{@port} -d #{@dbname} -Fc -f #{dump_filename}"
       result = system("PGPASSWORD='#{@password}' #{cmd}")
       if result
         logger.info "pg_dump_successful to #{dump_filename}"
